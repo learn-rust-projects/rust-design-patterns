@@ -1,0 +1,93 @@
+name: Rust CI
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            rust-toolchain: nightly
+            target: x86_64-unknown-linux-gnu
+          - os: windows-latest
+            rust-toolchain: nightly
+            target: x86_64-pc-windows-msvc
+          - os: macos-latest
+            rust-toolchain: nightly
+            target: x86_64-apple-darwin
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install jq (Linux only)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          toolchain: ${{ matrix.rust-toolchain }}
+          components: rust-src, clippy, rustfmt
+          targets: ${{ matrix.target }}
+
+      - name: Check rust version
+        run: rustc --version --verbose
+
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-registry-
+
+      - name: Cache cargo build
+        uses: actions/cache@v4
+        with:
+          path: target
+          key: ${{ runner.os }}-cargo-build-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-build-
+
+      - name: Check code format
+        run: cargo fmt --all -- --check
+
+      - name: Clippy
+        run: cargo clippy --target ${{ matrix.target }} --all-features -- -A clippy::new_without_default
+
+      - name: Build
+        run: cargo build --target ${{ matrix.target }} --all-features
+
+      - name: Run tests
+        run: cargo test --target ${{ matrix.target }} --all-features --verbose
+
+      - name: Run all binaries in workspace
+        if: runner.os == 'Linux'
+        run: |
+          set -e
+          cargo metadata --format-version 1 --no-deps > metadata.json
+          for manifest in $(jq -r '.packages[].manifest_path' metadata.json); do
+            pkg_dir=$(dirname "$manifest")
+            cd "$pkg_dir"
+            bin_names=$(grep -A 1 '^\[\[bin\]\]' Cargo.toml | grep '^name' | awk -F'=' '{print $2}' | tr -d '"' | tr -d ' ')
+            for bin in $bin_names; do
+              echo "Running [[bin]] $bin in $pkg_dir"
+              cargo run --bin "$bin" || exit 1
+            done
+            if [ -d "src/bin" ]; then
+              for binfile in src/bin/*.rs; do
+                [ -e "$binfile" ] || continue
+                bin=$(basename "${binfile%.rs}")
+                echo "Running src/bin/$bin.rs as $bin in $pkg_dir"
+                cargo run --bin "$bin" || exit 1
+              done
+            fi
+            cd - > /dev/null
+          done

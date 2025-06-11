@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "simple-factory"
+version = "0.1.0"
+
+[[bin]]
+name = "simple-factory"
+path = "main.rs"

@@ -1,0 +1,9 @@
+[workspace]
+resolver = "3"
+members = [
+  "creational/builder/builder",
+  "creational/factory/abstract-factory",
+  "creational/factory/factory-method",
+  "creational/factory/simple-factory",
+  "creational/singleton/singleton",
+]
