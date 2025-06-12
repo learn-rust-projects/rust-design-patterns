@@ -6,4 +6,9 @@ members = [
   "creational/factory/factory-method",
   "creational/factory/simple-factory",
   "creational/singleton/singleton",
+
+  "structural/bridge/cloud",
+  "structural/agent/Idempotency",
+  "structural/decorator/io",
+
 ]

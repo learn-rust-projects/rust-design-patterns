@@ -1,0 +1,12 @@
+[package]
+edition = "2024"
+name = "agent-idempotency"
+version = "0.1.0"
+
+[lib]
+path = "lib.rs"
+
+[[bin]]
+name = "agent-idempotency"
+path = "bin.rs"
+

@@ -1,0 +1,11 @@
+[package]
+edition = "2024"
+name = "decorator"
+version = "0.1.0"
+
+[lib]
+path = "lib.rs"
+
+[[bin]]
+name = "decorator-io"
+path = "bin.rs"
