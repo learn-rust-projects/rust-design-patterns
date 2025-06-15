@@ -10,5 +10,5 @@ members = [
   "structural/bridge/cloud",
   "structural/agent/Idempotency",
   "structural/decorator/io",
-
+  "structural/adapater/object_adapater"
 ]

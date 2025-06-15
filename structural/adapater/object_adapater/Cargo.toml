@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "adapater"
+version = "0.1.0"
+
+[[bin]]
+name = "adapater"
+path = "bin.rs"
