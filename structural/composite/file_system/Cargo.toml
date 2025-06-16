@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "composite-file-system"
+version = "0.1.0"
+
+[[bin]]
+name = "composite-file-system"
+path = "bin.rs"

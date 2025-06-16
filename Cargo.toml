@@ -10,5 +10,10 @@ members = [
   "structural/bridge/cloud",
   "structural/agent/Idempotency",
   "structural/decorator/io",
-  "structural/adapater/object_adapater"
+  "structural/adapater/object_adapater",
+  "structural/facade/player_facade",
+  "structural/composite/file_system",
+  "structural/flyweight/permission",
+
+  "behavioral/observer/event_bus",
 ]
