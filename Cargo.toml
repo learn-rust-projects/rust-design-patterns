@@ -17,4 +17,7 @@ members = [
 
   "behavioral/observer/event-bus",
   "behavioral/template_method/log",
+  "techniques/callback/codegen-template",
+  "techniques/callback/listener",
+  "techniques/callback/hook",
 ]
