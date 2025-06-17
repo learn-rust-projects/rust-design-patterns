@@ -1,8 +1,8 @@
 [package]
 edition = "2024"
-name = "adapater"
+name = "object-adapater"
 version = "0.1.0"
 
 [[bin]]
-name = "adapater"
+name = "object-adapater"
 path = "bin.rs"

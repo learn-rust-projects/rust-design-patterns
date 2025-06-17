@@ -1,5 +1,5 @@
-use facade_permission::permission::RoleFactory;
-use facade_permission::permission::User;
+use flyweight_permission::permission::RoleFactory;
+use flyweight_permission::permission::User;
 
 fn main() {
     let factory = RoleFactory::new();

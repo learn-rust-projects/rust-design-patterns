@@ -1,11 +1,11 @@
 [package]
 edition = "2024"
-name = "facade-permission"
+name = "flyweight-permission"
 version = "0.1.0"
 
 [lib]
 path = "lib.rs"
 
 [[bin]]
-name = "facade-permission"
+name = "flyweight-permission"
 path = "bin.rs"

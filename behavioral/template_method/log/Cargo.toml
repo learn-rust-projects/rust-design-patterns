@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "template-method-log"
+version = "0.1.0"
+
+[[bin]]
+name = "template-method-log"
+path = "bin.rs"
