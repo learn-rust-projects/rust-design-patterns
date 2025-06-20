@@ -1,5 +1,6 @@
 use futures::future::join_all;
 use std::sync::Arc;
+use std::time::Duration;
 use tokio::sync::Mutex;
 
 type AsyncHook = Box<dyn Fn() -> tokio::task::JoinHandle<()> + Send + Sync>;
@@ -68,9 +69,35 @@ async fn main() {
     });
 
     println!("Async application running. Press Ctrl-C to exit.");
-
+    // 模拟延迟后发送 Ctrl+C（SIGINT）
+    tokio::spawn(async {
+        tokio::time::sleep(Duration::from_secs(3)).await;
+        println!("[Simulator] Sending SIGINT to self...");
+        send_ctrl_c();
+    });
     loop {
         tokio::time::sleep(std::time::Duration::from_secs(5)).await;
         println!("Async service running...");
+    }
+}
+
+#[cfg(unix)]
+fn send_ctrl_c() {
+    use std::process::Command;
+    // 获取当前进程的 PID
+    let pid = std::process::id();
+    // 使用系统的 kill 命令发送 SIGINT 信号
+    Command::new("kill")
+        .arg("-SIGINT")
+        .arg(pid.to_string())
+        .status()
+        .expect("Failed to send SIGINT");
+}
+
+#[cfg(windows)]
+fn send_ctrl_c() {
+    use windows::Win32::System::Console::{CTRL_C_EVENT, GenerateConsoleCtrlEvent};
+    unsafe {
+        GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0).expect("Failed to send Ctrl+C");
     }
 }
