@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "vistor-file-handler"
+version = "0.1.0"
+
+[[bin]]
+name = "vistor-file-handler"
+path = "bin.rs"

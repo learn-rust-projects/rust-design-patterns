@@ -16,7 +16,9 @@ members = [
   "structural/flyweight/permission",
 
   "behavioral/observer/event-bus",
-  "behavioral/template_method/log",
+  "behavioral/template-method/log",
+  "behavioral/vistor/file-handler",
+
   "techniques/callback/codegen-template",
   "techniques/callback/listener",
   "techniques/callback/hook",
