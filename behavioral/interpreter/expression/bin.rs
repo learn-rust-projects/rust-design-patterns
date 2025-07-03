@@ -63,5 +63,5 @@ fn main() {
 
     let result = expr.interpret();
     // Output: The result is: 6
-    println!("The result is: {}", result); 
+    println!("The result is: {result}");
 }

@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "mediator-chat-room"
+version = "0.1.0"
+
+[[bin]]
+name = "mediator-chat-room"
+path = "bin.rs"

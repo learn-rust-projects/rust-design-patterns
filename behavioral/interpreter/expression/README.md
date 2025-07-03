@@ -1,40 +1,29 @@
-# The Interpreter Pattern Demo
+# Mediator Pattern Example
 
-The Interpreter Pattern is a behavioral design pattern used to define a grammar for a language and build an interpreter to evaluate expressions written in that language. The core idea is to abstract the grammar rules into a class structure (AST - Abstract Syntax Tree), compose these structures, and define a unified interface to interpret or execute the language logic programmatically.
+The **Mediator Pattern** is a behavioral design pattern that reduces coupling between multiple objects. It introduces a mediator object that encapsulates how these objects interact, so that individual objects do not need to reference each other directly. This improves the modularity, maintainability, and flexibility of the system.
 
-This pattern is especially suitable for scenarios such as:
-
-- Implementing simple scripting languages or domain-specific languages (DSLs)
-- Modeling and evaluating rule-based expressions (e.g., math formulas, logic expressions, filters)
-- Expression evaluators in state machines, formula calculators, or rule engines
-
----
+This project demonstrates the pattern with a "chatroom" scenario. Multiple users send and receive messages through a central mediator. Instead of direct communication between users, messages are passed to the mediator, which then dispatches them to the appropriate recipients.
 
 ### Pattern Structure
 
-| Role                          | Responsibility                                                      |
-|-------------------------------|----------------------------------------------------------------------|
-| Abstract Expression           | Defines the interpret operation interface (e.g., `interpret()`)     |
-| Terminal Expression           | Represents atomic elements like numbers or constants                |
-| Non-Terminal Expression       | Represents composite expressions such as addition or subtraction    |
-| Client                        | Builds the expression tree and invokes the interpret logic          |
+- **Mediator**: Defines a unified interface for communication and coordinates interactions between participants.
+- **Concrete Mediator**: Implements the mediator interface, maintains a list of participants, and handles the message dispatch logic.
+- **Colleague/User**: Interacts with the mediator to send and receive messages.
+- **Client**: Responsible for creating the mediator and users, and initiating the communication process.
 
----
+### Applicable Scenarios
 
-This project demonstrates the pattern using addition and subtraction expressions. By composing multiple expression objects, an abstract syntax tree is built, and the expression is evaluated recursively by calling the `interpret()` method.
+- Decoupling GUI components and coordinating events (e.g., interaction between buttons, forms, and text fields)
+- Message dispatching between users in chatrooms or collaboration tools
+- Systems with complex interaction rules between components, where central coordination is desired
 
-For example, the expression:
+### Advantages
 
-`5 + (3 - 2)`
+- Reduces coupling between components and clarifies system structure
+- Centralized control makes it easier to add behavior such as logging or message filtering
+- Simplifies maintenance and extension of interaction logic
 
-Can be represented as the following syntax tree:
+### Disadvantages
 
-```text
-    Add
-   /   \
- 5     Subtract
-       /     \
-     3        2
-```
-
-The evaluation proceeds recursively from the bottom of the tree upwards, producing the final result 6.
+- The mediator can become overly complex, evolving into a "god object"
+- Centralizing all interaction logic can lead to potential performance bottlenecks

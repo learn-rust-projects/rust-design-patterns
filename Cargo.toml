@@ -30,6 +30,7 @@ members = [
   "behavioral/memento/editor",
   "behavioral/command/text-editor",
   "behavioral/interpreter/expression",
+  "behavioral/mediator/chat-room",
   
   "techniques/callback/codegen-template",
   "techniques/callback/listener",
