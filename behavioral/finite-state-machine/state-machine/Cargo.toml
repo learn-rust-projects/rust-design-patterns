@@ -1,0 +1,11 @@
+[package]
+edition = "2024"
+name = "state-machine"
+version = "0.1.0"
+
+[lib]
+path = "lib.rs"
+
+[[bin]]
+name = "state-machine"
+path = "bin.rs"

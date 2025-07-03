@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "state-transition-table"
+version = "0.1.0"
+
+[[bin]]
+name = "state-transition-table"
+path = "bin.rs"

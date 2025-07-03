@@ -22,6 +22,11 @@ members = [
   "behavioral/strategy/stateless-func",
   "behavioral/chain-of-responsibility/link",
   "behavioral/chain-of-responsibility/array",
+  "behavioral/finite-state-machine/state-machine",
+  "behavioral/finite-state-machine/function-style",
+  "behavioral/finite-state-machine/transition-table",
+  "behavioral/finite-state-machine/transition-table-machine",
+  
   
 
   "techniques/callback/codegen-template",
