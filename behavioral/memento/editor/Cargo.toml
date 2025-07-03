@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "memento-editor"
+version = "0.1.0"
+
+[[bin]]
+name = "memento-editor"
+path = "bin.rs"
