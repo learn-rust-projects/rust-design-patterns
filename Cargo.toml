@@ -26,9 +26,8 @@ members = [
   "behavioral/finite-state-machine/function-style",
   "behavioral/finite-state-machine/transition-table",
   "behavioral/finite-state-machine/transition-table-machine",
+  "behavioral/iterator/number",
   
-  
-
   "techniques/callback/codegen-template",
   "techniques/callback/listener",
   "techniques/callback/hook",

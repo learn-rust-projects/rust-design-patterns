@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "iterator-number"
+version = "0.1.0"
+
+[[bin]]
+name = "iterator-number"
+path = "bin.rs"
