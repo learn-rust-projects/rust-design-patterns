@@ -1,156 +1,158 @@
-# Rust 状态模式（State Pattern）实现方式
+# Rust State Pattern Implementations
 
-状态模式是一种行为型设计模式，允许对象在内部状态改变时改变其行为。它将状态封装成独立的结构体或模块，使得状态之间的切换更加清晰，职责更明确，逻辑更解耦。
+The **State Pattern** is a behavioral design pattern that allows an object to change its behavior when its internal state changes. It encapsulates states into separate structs or modules, making transitions clearer, responsibilities more distinct, and logic more decoupled.
 
-本项目展示了 Rust 中状态模式的三种典型实现方式，以及一种混合实现，适用于不同复杂度的状态系统。
-
-### 实现方式总览
-
-| 实现方式                     | 风格           | 特点                     | 适用场景                                |
-|------------------------------|----------------|--------------------------|-----------------------------------------|
-| 方式一：Trait + Box\<dyn>    | 面向对象       | 高度封装、逻辑分离       | 状态行为复杂、对象职责明确的场景        |
-| 方式二：状态枚举 + match     | 函数式风格     | 简洁清晰、性能优         | 状态有限、切换逻辑简单的系统            |
-| 方式三：查表法（二维数组）   | 配置驱动       | 易于维护、适配配置文件   | 状态多、事件多、转移频繁的场景          |
-| 方式四：查表法 + 状态模式    | 混合架构       | 数据集中、行为封装       | 状态多、副作用复杂、需要可组合行为的系统 |
+This project demonstrates four common implementations of the State Pattern in Rust, each suited for different levels of complexity in state systems.
 
 ---
 
-### 示例背景：Mario 状态机
+## Overview of Implementation Approaches
 
-该状态机模拟一个马里奥游戏人物状态的变更过程。
-
-状态包括：
-
-- Small：普通状态
-- Super：吃蘑菇变大
-- Cape：获得斗篷飞行
-- Fire：获得火球攻击
-
-事件包括：
-
-- obtain_mushroom：吃蘑菇
-- obtain_cape：吃斗篷
-- obtain_fire_flower：吃火花
-- meet_monster：遇敌受伤
-
-状态行为的本质是状态转移加上积分变更（或执行副作用动作）。
-
-状态转移表如下：
-
-| 当前状态 | E1: Mushroom       | E2: Cape          | E3: Fire Flower    | E4: Monster      |
-|----------|--------------------|-------------------|--------------------|------------------|
-| Small    | Super / +100       | Cape / +200       | Fire / +300        | 无变化           |
-| Super    | Super / 0          | Cape / +200       | Fire / +300        | Small / -100     |
-| Cape     | Cape / 0           | Cape / 0          | Cape / 0           | Small / -200     |
-| Fire     | Fire / 0           | Fire / 0          | Fire / 0           | Small / -300     |
+| Approach                        | Style             | Characteristics               | Recommended Use Cases                              |
+|--------------------------------|-------------------|-------------------------------|-----------------------------------------------------|
+| Method 1: Trait + Box\<dyn>     | Object-Oriented   | Highly encapsulated, modular  | Complex behaviors with clear object responsibilities |
+| Method 2: Enum + match          | Functional Style  | Simple, high-performance      | Small finite state machines with simple transitions  |
+| Method 3: Lookup Table          | Config-Driven     | Centralized, data-friendly    | Systems with many states/events and predictable logic |
+| Method 4: Table + Trait Fusion  | Hybrid Architecture | Decoupled data & behavior     | Large-scale state systems with side effects          |
 
 ---
 
-### 实现一：状态机（state-machine）
+## Example Scenario: Mario State Machine
 
-该实现方式采用面向对象风格，为每个状态定义一个结构体，实现统一的 trait 接口。每个状态类持有状态变更逻辑，并通过状态机传入自身上下文实现转移。
+This state machine simulates how Mario's power-up status changes in response to different events.
 
-优点：
+### States:
 
-- 职责分离清晰，易于扩展和维护；
-- 支持每个状态自定义行为。
+- **Small**: Base state
+- **Super**: After eating a mushroom
+- **Cape**: After getting a cape
+- **Fire**: After getting a fire flower
 
-缺点：
+### Events:
 
-- 存在运行期动态分发的开销；
-- 相较其他方式结构更复杂，代码量更大。
+- `obtain_mushroom`: Eats a mushroom
+- `obtain_cape`: Gets a cape
+- `obtain_fire_flower`: Gets a fire flower
+- `meet_monster`: Encounters a monster
 
-适合场景：
+The behavior of each state is defined by a combination of **state transition** and **score change**.
 
-- 状态转移逻辑简单但行为复杂的系统。
+### State Transition Table:
 
----
-
-### 实现二：状态枚举 + match 分支（enum-match）
-
-该实现使用枚举表示所有状态，状态行为统一写在状态机中。通过 match 分支处理每个事件下的状态转移逻辑。
-
-优点：
-
-- 实现简单、结构紧凑、效率高；
-- 易于快速原型开发。
-
-缺点：
-
-- 难以扩展，违反开闭原则；
-- 行为与状态逻辑耦合度高。
-
-适合场景：
-
-- 状态数量有限；
-- 状态行为清晰、变更频率低的项目。
+| Current State | E1: Mushroom     | E2: Cape        | E3: Fire Flower | E4: Monster     |
+|---------------|------------------|-----------------|------------------|------------------|
+| Small         | Super / +100     | Cape / +200     | Fire / +300      | No Change        |
+| Super         | Super / 0        | Cape / +200     | Fire / +300      | Small / -100     |
+| Cape          | Cape / 0         | Cape / 0        | Cape / 0         | Small / -200     |
+| Fire          | Fire / 0         | Fire / 0        | Fire / 0         | Small / -300     |
 
 ---
 
-### 实现三：查表法（transition-table）
+## Method 1: Trait-based State Machine
 
-该实现将状态转移关系和积分变更行为编码为两个二维数组，分别为 `transition_table` 和 `action_table`。事件触发时查表完成状态转移和积分变化。
+This object-oriented implementation defines one struct per state, each implementing a shared trait. Each state struct contains its own transition logic and interacts with a shared state machine.
 
-优点：
+**Advantages:**
 
-- 状态转移逻辑清晰、集中；
-- 适合与配置文件（如 YAML / JSON / DSL）集成；
-- 易于维护、扩展状态集。
+- Clear separation of responsibilities
+- Easy to extend and maintain
+- Supports state-specific behaviors
 
-缺点：
+**Disadvantages:**
 
-- 不支持副作用逻辑（如打印、日志、UI 控制等）；
-- 系统行为高度受限于查表定义。
+- Runtime dynamic dispatch has some overhead
+- More verbose and complex structure
 
-适合场景：
+**Best For:**
 
-- 状态与事件种类繁多；
-- 行为简单、结构规则性强的系统；
-- 需要配置驱动逻辑的自动机。
+- Simple transition logic with rich state behavior
 
 ---
 
-### 实现四：查表法 + 状态模式（transition-table-machine）
+## Method 2: Enum + match-based State Machine
 
-该实现结合查表法与状态模式的优势，分离状态迁移数据与行为逻辑：
+This approach uses an enum to represent all states and handles event transitions with `match` statements.
 
-- 使用 `TRANSITIONS` 和 `SCORES` 管理状态变迁与积分；
-- 使用 `MarioState` trait 封装每个状态对应的副作用逻辑；
-- 状态行为通过动态分发实现灵活调用。
+**Advantages:**
 
-事件处理流程：
+- Simple, concise, high performance
+- Ideal for rapid prototyping
 
-1. 当前状态执行自身行为（如打印日志）；
-2. 状态机通过查表获取新状态与得分；
-3. 更新当前状态与积分。
+**Disadvantages:**
 
-优点：
+- Hard to scale or extend
+- Coupled state and behavior logic (violates open-closed principle)
 
-- 状态数据与行为逻辑彻底分离；
-- 状态行为可组合、可测试；
-- 支持热切换数据表（配置热更新）。
+**Best For:**
 
-缺点：
-
-- 实现复杂度相对较高；
-- 行为中需要上下文注入时需额外设计支持。
-
-适合场景：
-
-- 状态与事件多样，行为复杂度中等；
-- 需要可视化、配置化与副作用结合的状态系统；
-- 游戏系统、UI 动画系统、交易流程建模等。
+- Small state sets
+- Low-change, clearly defined systems
 
 ---
 
-### 实现方式对比与推荐
+## Method 3: Lookup Table State Machine
 
-| 实现方式                 | 封装性 | 可扩展性 | 性能 | 难度 | 推荐使用场景                                       |
-|--------------------------|--------|----------|------|------|----------------------------------------------------|
-| Trait + Box              | 高     | 高       | 中等 | 中   | 行为复杂、逻辑分离需求强                           |
-| 枚举 + match             | 低     | 低       | 高   | 低   | 状态数量有限，逻辑简单                             |
-| 查表法                   | 中     | 中       | 高   | 低   | 状态事件多但逻辑统一、数据驱动系统                 |
-| 查表法 + 状态模式        | 高     | 高       | 高   | 中   | 状态/事件多，副作用复杂但逻辑可配置、可组合的系统 |
+This approach encodes state transitions and score changes into two 2D arrays: `transition_table` and `action_table`. Transitions are determined by table lookups based on the current state and event.
+
+**Advantages:**
+
+- Centralized, clean transition logic
+- Compatible with config files (YAML / JSON / DSL)
+- Easy to maintain and expand
+
+**Disadvantages:**
+
+- Cannot represent side effects (e.g., logging, UI)
+- Logic limited by static tables
+
+**Best For:**
+
+- Large number of states/events
+- Simple, data-driven systems
+- Configurable automata
 
 ---
 
+## Method 4: Lookup Table + Trait Hybrid
+
+This hybrid model combines lookup tables with the trait-based pattern:
+
+- `TRANSITIONS` and `SCORES` manage state changes and scores
+- A `MarioState` trait encapsulates state-specific side effects
+- Dynamic dispatch invokes side effects before transitions
+
+**Event Flow:**
+
+1. Current state executes its side effect (e.g., logging)
+2. State machine performs lookup to get next state and score
+3. Updates current state and score accordingly
+
+**Advantages:**
+
+- Clean separation of data and behavior
+- Composable and testable state logic
+- Enables dynamic table switching or hot config reloads
+
+**Disadvantages:**
+
+- Slightly more complex to implement
+- Needs additional design to inject context for behaviors
+
+**Best For:**
+
+- Systems with many states/events and moderate complexity
+- Combines configurability and behavioral customization
+- Game logic, UI animation systems, transaction modeling, etc.
+
+---
+
+## Comparison & Recommendation
+
+| Implementation Style         | Encapsulation | Extensibility | Performance | Complexity | Recommended Scenarios                                             |
+|-----------------------------|---------------|---------------|-------------|------------|--------------------------------------------------------------------|
+| Trait + Box                 | High          | High          | Medium      | Medium     | Behavior-heavy logic with clean separation of responsibilities     |
+| Enum + match                | Low           | Low           | High        | Low        | Simple systems with limited states                                |
+| Lookup Table                | Medium        | Medium        | High        | Low        | Event/state-heavy, config-driven systems                          |
+| Table + Trait Hybrid        | High          | High          | High        | Medium     | Scalable systems needing side effects + data-driven transitions    |
+
+---
