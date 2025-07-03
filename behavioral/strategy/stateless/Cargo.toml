@@ -1,0 +1,11 @@
+[package]
+edition = "2024"
+name = "strategy-stateless"
+version = "0.1.0"
+
+[lib]
+path = "lib.rs"
+
+[[bin]]
+name = "strategy-stateless"
+path = "bin.rs"

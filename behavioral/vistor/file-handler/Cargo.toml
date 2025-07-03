@@ -3,6 +3,9 @@ edition = "2024"
 name = "vistor-file-handler"
 version = "0.1.0"
 
+[lib]
+path = "lib.rs"
+
 [[bin]]
 name = "vistor-file-handler"
-path = "bin.rs"
+path = "bin/bin.rs"

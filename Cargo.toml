@@ -18,6 +18,8 @@ members = [
   "behavioral/observer/event-bus",
   "behavioral/template-method/log",
   "behavioral/vistor/file-handler",
+  "behavioral/strategy/stateless",
+  "behavioral/strategy/stateless-func",
 
   "techniques/callback/codegen-template",
   "techniques/callback/listener",

@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "strategy-stateless-func"
+version = "0.1.0"
+
+[[bin]]
+name = "strategy-stateless-func"
+path = "bin.rs"
