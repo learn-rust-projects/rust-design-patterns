@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "command-text-editor"
+version = "0.1.0"
+
+[[bin]]
+name = "command-text-editor"
+path = "bin.rs"

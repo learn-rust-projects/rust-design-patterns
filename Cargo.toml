@@ -28,6 +28,7 @@ members = [
   "behavioral/finite-state-machine/transition-table-machine",
   "behavioral/iterator/number",
   "behavioral/memento/editor",
+  "behavioral/command/text-editor",
   
   "techniques/callback/codegen-template",
   "techniques/callback/listener",
