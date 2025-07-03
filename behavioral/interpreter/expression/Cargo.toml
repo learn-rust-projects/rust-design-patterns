@@ -1,0 +1,8 @@
+[package]
+edition = "2024"
+name = "interpreter-expression"
+version = "0.1.0"
+
+[[bin]]
+name = "interpreter-expression"
+path = "bin.rs"

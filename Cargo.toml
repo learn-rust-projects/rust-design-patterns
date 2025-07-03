@@ -29,6 +29,7 @@ members = [
   "behavioral/iterator/number",
   "behavioral/memento/editor",
   "behavioral/command/text-editor",
+  "behavioral/interpreter/expression",
   
   "techniques/callback/codegen-template",
   "techniques/callback/listener",
