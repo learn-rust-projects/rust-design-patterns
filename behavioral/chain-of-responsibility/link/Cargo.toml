@@ -1,0 +1,11 @@
+[package]
+edition = "2024"
+name = "chain-link"
+version = "0.1.0"
+
+[lib]
+path = "lib.rs"
+
+[[bin]]
+name = "chain-link"
+path = "bin.rs"

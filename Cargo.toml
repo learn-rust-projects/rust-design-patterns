@@ -20,6 +20,9 @@ members = [
   "behavioral/vistor/file-handler",
   "behavioral/strategy/stateless",
   "behavioral/strategy/stateless-func",
+  "behavioral/chain-of-responsibility/link",
+  "behavioral/chain-of-responsibility/array",
+  
 
   "techniques/callback/codegen-template",
   "techniques/callback/listener",
