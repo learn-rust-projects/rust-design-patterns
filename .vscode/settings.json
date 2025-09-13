@@ -1,0 +1,52 @@
+{
+    // -----------------------------
+    // Rust Analyzer Configuration
+    // -----------------------------
+    "rust-analyzer.cargo.features": "all", // Enable all features defined in Cargo.toml
+    "rust-analyzer.procMacro.enable": true, // Enable procedural macro expansion
+    "rust-analyzer.cargo.autoreload": true, // Auto-reload Cargo project for accurate analysis
+    "rust-analyzer.checkOnSave": true, // Enable checking code on save
+    "rust-analyzer.check.command": "clippy", // Use Clippy for on-save checks
+    "rust-analyzer.diagnostics.enable": true, // Enable diagnostics
+    "rust-analyzer.diagnostics.disabled": [ // Disable specific diagnostics
+        "unresolved-proc-macro", // Ignore unresolved procedural macro warnings
+        "inactive-code" // Ignore inactive code warnings
+    ],
+    // -----------------------------
+    // Formatting and Save Settings
+    // -----------------------------
+    "editor.formatOnSave": true, // Automatically format code on save
+    "editor.defaultFormatter": "rust-lang.rust-analyzer", // Use Rust Analyzer as the default formatter
+    "files.autoSave": "onFocusChange", // Auto-save files when changing focus
+    // -----------------------------
+    // Inlay Hints (Display Type Information)
+    // -----------------------------
+    "editor.inlayHints.enabled": "on", // Enable inlay hints in the editor
+    "rust-analyzer.inlayHints.typeHints.enable": true, // Show type hints for variables
+    "rust-analyzer.inlayHints.parameterHints.enable": true, // Show function parameter hints
+    "rust-analyzer.inlayHints.chainingHints.enable": true, // Show intermediate types in method chains
+    // -----------------------------
+    // Optional: Enhanced Error Visibility
+    // -----------------------------
+    "errorLens.enabled": true, // Enable inline error/warning highlighting
+    "errorLens.fontSize": "12px", // Font size for error/warning messages
+    "errorLens.fontWeight": "bold", // Font weight
+    // -----------------------------
+    // Optional: Show TODO / FIXME Comments
+    // -----------------------------
+    "todo-tree.general.tags": [
+        "TODO",
+        "FIXME",
+        "BUG"
+    ],
+    "caseConverter.caseCycle": [
+        "original",
+        "const",
+        "pascal",
+        "snake",
+        "kebab"
+    ],
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    }
+}

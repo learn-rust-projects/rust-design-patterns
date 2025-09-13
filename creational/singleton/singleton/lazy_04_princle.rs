@@ -1,8 +1,8 @@
 // Custom thread-safe lazy loading cell
-use std::cell::UnsafeCell;
-use std::sync::Once;
+use std::{cell::UnsafeCell, sync::Once};
 
-// UnsafeCell<T> is !Sync, manual Sync implementation requires thread safety guarantee
+// UnsafeCell<T> is !Sync, manual Sync implementation requires thread safety
+// guarantee
 pub struct MyOnceCell<T> {
     once: Once,
     value: UnsafeCell<Option<T>>,

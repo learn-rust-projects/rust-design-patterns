@@ -1,5 +1,4 @@
-use super::ast::*;
-use super::callback::CodeGenCallback;
+use super::{ast::*, callback::CodeGenCallback};
 
 pub struct JsGen {
     pub result: Vec<String>,

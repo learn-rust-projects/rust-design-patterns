@@ -2,10 +2,11 @@ pub mod pdf;
 pub mod ppt;
 pub mod word;
 
-use crate::visitor::Visitor;
 pub use pdf::PdfFile;
 pub use ppt::PptFile;
 pub use word::WordFile;
+
+use crate::visitor::Visitor;
 
 pub enum File<'a> {
     Pdf(&'a PdfFile),

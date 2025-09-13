@@ -8,8 +8,7 @@ fn console_log(message: &str) {
 
 // Log to a file
 fn file_log(message: &str) {
-    use std::fs::OpenOptions;
-    use std::io::Write;
+    use std::{fs::OpenOptions, io::Write};
 
     let mut file = OpenOptions::new()
         .create(true)

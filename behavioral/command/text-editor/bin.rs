@@ -1,6 +1,5 @@
 mod editor;
-use std::cell::RefCell;
-use std::rc::Rc;
+use std::{cell::RefCell, rc::Rc};
 
 use editor::*;
 

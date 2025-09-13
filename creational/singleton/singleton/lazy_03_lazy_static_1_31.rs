@@ -1,8 +1,10 @@
-// For Rust 1.31+, macro-based implementation (gradually being replaced by once_cell)
-// You get a `&'static Logger`, which is a shared immutable reference, wrapped in `Mutex<Config>`, making it **mutable + thread-safe**
+// For Rust 1.31+, macro-based implementation (gradually being replaced by
+// once_cell) You get a `&'static Logger`, which is a shared immutable
+// reference, wrapped in `Mutex<Config>`, making it **mutable + thread-safe**
+
+use std::sync::Mutex;
 
 use lazy_static::lazy_static;
-use std::sync::Mutex;
 
 struct Config {
     value: i32,

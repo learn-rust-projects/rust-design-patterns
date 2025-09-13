@@ -1,5 +1,6 @@
 // Composite Pattern applied to a file system in Rust
-// This is a design pattern demonstration where Directory and File are both FileSystemNodes
+// This is a design pattern demonstration where Directory and File are both
+// FileSystemNodes
 
 // Trait that defines common operations
 pub trait FileSystemNode {

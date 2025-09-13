@@ -1,16 +1,20 @@
 //! Business logic module
 //!
-//! All proxy logic is encapsulated here. The main module doesn't know about the proxy.
+//! All proxy logic is encapsulated here. The main module doesn't know about the
+//! proxy.
 //!
 //! # Pattern Principles
-//! - **Single Responsibility**: Business logic is separate from idempotency logic.
-//! - **Open/Closed Principle**: Add idempotency at composition, not by modifying original code.
+//! - **Single Responsibility**: Business logic is separate from idempotency
+//!   logic.
+//! - **Open/Closed Principle**: Add idempotency at composition, not by
+//!   modifying original code.
 
-use crate::idempotency::proxy::IdempotencyProxy;
-use crate::idempotency::store::MemoryStore;
-use crate::operation::Operation;
-use std::sync::LazyLock;
-use std::sync::Mutex;
+use std::sync::{LazyLock, Mutex};
+
+use crate::{
+    idempotency::{proxy::IdempotencyProxy, store::MemoryStore},
+    operation::Operation,
+};
 mod add_one;
 use add_one::AddOne;
 
@@ -19,7 +23,8 @@ static STORE: LazyLock<Mutex<MemoryStore<String, i32>>> =
     LazyLock::new(|| Mutex::new(MemoryStore::new()));
 
 /// Runs the add_one operation with idempotency proxy.
-/// Demonstrates composing business logic with infrastructure logic via the decorator/proxy pattern.
+/// Demonstrates composing business logic with infrastructure logic via the
+/// decorator/proxy pattern.
 pub fn run_add_one_with_idempotency(key: Option<String>) {
     let add_one = AddOne(41);
     let mut store = STORE.lock().unwrap();

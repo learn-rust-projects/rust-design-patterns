@@ -1,0 +1,34 @@
+# =========================================
+# Language Edition & Experimental Features
+# =========================================
+style_edition = "2024"           # Format using Rust 2024 Edition style
+unstable_features = true         # Enable unstable Rustfmt features (requires nightly)
+
+# =========================================
+# Comments & Documentation
+# =========================================
+comment_width = 80               # Maximum comment width: 80 characters
+wrap_comments = true             # Automatically wrap normal comments
+format_code_in_doc_comments = true   # Format code blocks inside doc comments
+normalize_comments = true        # Normalize comment indentation and remove extra spaces
+normalize_doc_attributes = true  # Normalize doc attributes formatting (e.g., #[doc = "..."])
+
+# =========================================
+# Macros
+# =========================================
+format_macro_bodies = true       # Format the internal body of macros
+format_macro_matchers = true     # Format macro matchers/patterns
+
+# =========================================
+# Imports & Wildcards
+# =========================================
+condense_wildcard_suffixes = true     # Collapse redundant wildcard imports (`::*`)
+imports_granularity = "Crate"         # Group imports by crate level: use my_crate::{mod1, mod2};
+group_imports = "StdExternalCrate"    # Import order: standard library → external crates → local crates
+
+# =========================================
+# Line Breaks & Syntax Shorthand
+# =========================================
+newline_style = "Unix"             # Use Unix line endings (\n)
+use_field_init_shorthand = true    # Use shorthand for struct initialization: X { a, b }
+use_try_shorthand = true           # Use `?` shorthand for error handling: do_something()? 

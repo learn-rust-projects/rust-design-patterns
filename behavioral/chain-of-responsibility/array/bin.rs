@@ -66,7 +66,8 @@ impl HandlerChain {
         }
     }
 
-    // call each handler, without checking if it is successful —— all handlers will be executed
+    // call each handler, without checking if it is successful —— all handlers will
+    // be executed
     pub fn handle_without_check(&self) {
         for handler in &self.handlers {
             // ignore the return value, force all handlers to be executed
@@ -92,7 +93,8 @@ fn main() {
     chain.add_handler(Box::new(HandlerA));
     chain.handle();
     println!("===========");
-    // call each handler, without checking if it is successful —— all handlers will be executed
+    // call each handler, without checking if it is successful —— all handlers will
+    // be executed
     let mut chain = HandlerChain::new();
     chain.add_handler(Box::new(HandlerA));
     chain.add_handler(Box::new(HandlerB));

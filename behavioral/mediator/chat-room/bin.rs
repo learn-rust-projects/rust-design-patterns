@@ -1,7 +1,7 @@
 mod chat_room;
+use std::{cell::RefCell, rc::Rc};
+
 use chat_room::*;
-use std::cell::RefCell;
-use std::rc::Rc;
 
 fn main() {
     let mediator: Rc<RefCell<dyn Mediator>> = Rc::new(RefCell::new(ChatRoomMediator::new()));

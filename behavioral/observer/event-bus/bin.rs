@@ -1,13 +1,17 @@
-use std::any::{Any, TypeId};
-use std::collections::HashMap;
-use std::sync::{Arc, Mutex};
+use std::{
+    any::{Any, TypeId},
+    collections::HashMap,
+    sync::{Arc, Mutex},
+};
 
 // Any: For runtime type inspection and downcasting.
-// Send + Sync: Ensures thread-safety — the event can be transferred and shared between threads safely.
+// Send + Sync: Ensures thread-safety — the event can be transferred and shared
+// between threads safely.
 pub trait Event: Any + Send + Sync {}
 
-// This provides a blanket implementation of the Event trait for any type T that implements Any + Send + Sync.
-// This allows most standard types to be used as events without manually implementing the trait.
+// This provides a blanket implementation of the Event trait for any type T that
+// implements Any + Send + Sync. This allows most standard types to be used as
+// events without manually implementing the trait.
 impl<T: Any + Send + Sync> Event for T {}
 
 // This creates a type alias Handler for a boxed function trait object that:
@@ -42,15 +46,17 @@ impl EventBus {
             observers: Mutex::new(HashMap::new()),
         }
     }
-    // 'static: This is required because you're boxing event handlers as trait objects (Box<dyn Fn(&dyn Any)>)
-    // to store them in a handler list, and trait objects erase lifetimes at runtime.
+    // 'static: This is required because you're boxing event handlers as trait
+    // objects (Box<dyn Fn(&dyn Any)>) to store them in a handler list, and
+    // trait objects erase lifetimes at runtime.
     pub fn register<E: Event + 'static, F>(&self, f: F)
     where
         F: Fn(&E) + Send + Sync + 'static,
     {
         let mut map = self.observers.lock().unwrap();
         let handlers = map.entry(TypeId::of::<E>()).or_default();
-        // It wraps the event handler function f into a type-erased closure and adds it to the event handler list handlers.
+        // It wraps the event handler function f into a type-erased closure and adds it
+        // to the event handler list handlers.
         handlers.push(Box::new(move |event| {
             if let Some(event) = event.downcast_ref::<E>() {
                 f(event);

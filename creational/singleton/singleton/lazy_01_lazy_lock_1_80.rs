@@ -1,7 +1,7 @@
 //! # Global Thread-Safe Counter (LazyLock Singleton)
 //!
-//! This example demonstrates how to implement a **global singleton counter service** in Rust using
-//! [`std::sync::LazyLock`] (stabilized in Rust 1.70).
+//! This example demonstrates how to implement a **global singleton counter
+//! service** in Rust using [`std::sync::LazyLock`] (stabilized in Rust 1.70).
 //!
 //! ## What it does
 //! - Defines a thread-safe `CounterService`
@@ -15,13 +15,16 @@
 //! - Ideal for simple global services: metrics, configs, caches, etc.
 //!
 //! ## How it works
-//! - A `static` global is wrapped in `LazyLock`    
+//! - A `static` global is wrapped in `LazyLock`
 //! - `CounterService` uses a `Mutex<u32>` for interior mutability
-//! - `with_counter` method exposes a closure-based API for safe, scoped access to the lock guard
+//! - `with_counter` method exposes a closure-based API for safe, scoped access
+//!   to the lock guard
 //!
 //! ## How to use
-//! - Call `GLOBAL_COUNTER.increment()` to increase, or `.get()` to read the value.
-//! - Use `GLOBAL_COUNTER.with_counter(|guard| { ... })` to perform complex operations holding the lock.
+//! - Call `GLOBAL_COUNTER.increment()` to increase, or `.get()` to read the
+//!   value.
+//! - Use `GLOBAL_COUNTER.with_counter(|guard| { ... })` to perform complex
+//!   operations holding the lock.
 //!
 //! ## Design Patterns Applied
 //!

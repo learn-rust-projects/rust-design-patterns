@@ -1,6 +1,6 @@
+use std::{sync::Arc, time::Duration};
+
 use futures::future::join_all;
-use std::sync::Arc;
-use std::time::Duration;
 use tokio::sync::Mutex;
 
 type AsyncHook = Box<dyn Fn() -> tokio::task::JoinHandle<()> + Send + Sync>;

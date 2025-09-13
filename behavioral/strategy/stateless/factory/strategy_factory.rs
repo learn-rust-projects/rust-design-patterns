@@ -1,5 +1,4 @@
-use crate::strategy::PaymentStrategy;
-use crate::strategy::{AliPay, WeChatPay};
+use crate::strategy::{AliPay, PaymentStrategy, WeChatPay};
 pub enum StrategyType {
     WeChat,
     Ali,

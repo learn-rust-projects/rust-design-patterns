@@ -1,5 +1,4 @@
-use vistor_file_handler::{Compressor, Extractor};
-use vistor_file_handler::{File, PdfFile, PptFile, WordFile};
+use vistor_file_handler::{Compressor, Extractor, File, PdfFile, PptFile, WordFile};
 
 fn main() {
     let pdf = PdfFile {

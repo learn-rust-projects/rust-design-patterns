@@ -2,8 +2,10 @@ use super::store::IdempotencyStore;
 use crate::operation::Operation;
 
 /// IdempotencyProxy is a Decorator/Proxy for Operation.
-/// It adds idempotency logic transparently to any operation without changing its code.
-/// - Decorator/Proxy Principle: Enhances an object by wrapping it with new behavior.
+/// It adds idempotency logic transparently to any operation without changing
+/// its code.
+/// - Decorator/Proxy Principle: Enhances an object by wrapping it with new
+///   behavior.
 /// - Open/Closed Principle: Add features by composition, not modification.
 pub struct IdempotencyProxy<'a, O, T, K = String>
 where

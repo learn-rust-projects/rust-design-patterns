@@ -1,5 +1,4 @@
-use flyweight_permission::permission::RoleFactory;
-use flyweight_permission::permission::User;
+use flyweight_permission::permission::{RoleFactory, User};
 
 fn main() {
     let factory = RoleFactory::new();

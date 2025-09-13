@@ -1,11 +1,9 @@
 // ------- Concrete Factories -------
-use super::abstract_factory::AbstractFactory;
-use super::abstract_products::Drink;
-use super::abstract_products::Food;
-use super::concrete_products::ChineseRice;
-use super::concrete_products::ChineseTea;
-use super::concrete_products::WesternSteak;
-use super::concrete_products::WesternWine;
+use super::{
+    abstract_factory::AbstractFactory,
+    abstract_products::{Drink, Food},
+    concrete_products::{ChineseRice, ChineseTea, WesternSteak, WesternWine},
+};
 
 pub struct ChineseFactory;
 impl AbstractFactory for ChineseFactory {

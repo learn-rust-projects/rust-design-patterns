@@ -1,7 +1,9 @@
+use std::{
+    collections::HashMap,
+    sync::{Arc, Mutex},
+};
+
 use super::role::Role;
-use std::collections::HashMap;
-use std::sync::Arc;
-use std::sync::Mutex;
 
 /// `RoleFactory` is responsible for managing and reusing `Role` instances.
 /// It ensures that each role is created only once and then shared.

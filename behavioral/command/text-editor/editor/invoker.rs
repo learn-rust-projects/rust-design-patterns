@@ -1,5 +1,6 @@
-use super::command::Command;
 use std::collections::VecDeque;
+
+use super::command::Command;
 pub struct CommandQueue {
     queue: VecDeque<Box<dyn Command>>,
     history: Vec<Box<dyn Command>>,

@@ -1,5 +1,6 @@
-use super::role::Role;
 use std::sync::Arc;
+
+use super::role::Role;
 pub struct User {
     id: u32,
     username: String,

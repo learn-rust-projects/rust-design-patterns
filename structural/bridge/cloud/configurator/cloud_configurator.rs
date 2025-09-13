@@ -1,5 +1,7 @@
-use crate::components::cloud_component::CloudComponent;
-use crate::features::has_mutable_component::HasMutableComponent;
+use crate::{
+    components::cloud_component::CloudComponent,
+    features::has_mutable_component::HasMutableComponent,
+};
 
 pub struct CloudConfigurator<C: CloudComponent> {
     pub component: C,

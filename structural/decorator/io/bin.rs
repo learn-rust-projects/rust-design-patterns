@@ -2,15 +2,19 @@
 //!
 //! # Design Pattern Explanation
 //!
-//! The **Decorator Pattern** allows you to dynamically add new behavior to objects
-//! without altering the structure of the original code. You achieve this by "wrapping"
-//! an object in one or more decorator objects that implement the same interface.
+//! The **Decorator Pattern** allows you to dynamically add new behavior to
+//! objects without altering the structure of the original code. You achieve
+//! this by "wrapping" an object in one or more decorator objects that implement
+//! the same interface.
 //!
 //! ## Principles Illustrated
 //!
-//! - **Open/Closed Principle:** Add functionality by composition, not modification.
-//! - **Single Responsibility Principle:** Each decorator encapsulates a single enhancement.
-//! - **Favor composition over inheritance:** Decorators wrap components, avoiding deep inheritance trees.
+//! - **Open/Closed Principle:** Add functionality by composition, not
+//!   modification.
+//! - **Single Responsibility Principle:** Each decorator encapsulates a single
+//!   enhancement.
+//! - **Favor composition over inheritance:** Decorators wrap components,
+//!   avoiding deep inheritance trees.
 //!
 //! ## Structure
 //!
@@ -22,9 +26,10 @@
 //!
 //! Demonstrates how decorators can be flexibly stacked.
 
-use decorator::component::stream::{FileStream, Stream};
-use decorator::stream::buffered_stream::BufferedStream;
-use decorator::stream::uppercase_stream::UppercaseStream;
+use decorator::{
+    component::stream::{FileStream, Stream},
+    stream::{buffered_stream::BufferedStream, uppercase_stream::UppercaseStream},
+};
 
 fn main() {
     // Base component: a file stream

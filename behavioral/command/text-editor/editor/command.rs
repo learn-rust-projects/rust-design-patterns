@@ -4,9 +4,9 @@ pub trait Command {
     fn description(&self) -> String;
 }
 
+use std::{cell::RefCell, rc::Rc};
+
 use crate::Editor;
-use std::cell::RefCell;
-use std::rc::Rc;
 
 pub struct InsertTextCommand {
     editor: Rc<RefCell<Editor>>,

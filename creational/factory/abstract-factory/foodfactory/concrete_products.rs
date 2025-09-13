@@ -1,5 +1,4 @@
-use super::abstract_products::Drink;
-use super::abstract_products::Food;
+use super::abstract_products::{Drink, Food};
 // ------- Concrete Products -------
 pub struct ChineseTea;
 impl Drink for ChineseTea {

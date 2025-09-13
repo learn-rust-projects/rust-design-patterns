@@ -2,8 +2,9 @@ use crate::component::stream::Stream;
 
 /// Decorator: UppercaseStream
 ///
-/// This struct is another concrete Decorator that transforms the data of any Stream to uppercase.
-/// Decorators can be combined (stacked) to provide multiple enhancements.
+/// This struct is another concrete Decorator that transforms the data of any
+/// Stream to uppercase. Decorators can be combined (stacked) to provide
+/// multiple enhancements.
 pub struct UppercaseStream<T: Stream> {
     inner: T, // The wrapped component
 }

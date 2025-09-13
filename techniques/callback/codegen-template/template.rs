@@ -1,5 +1,4 @@
-use super::ast::Statement;
-use super::callback::CodeGenCallback;
+use super::{ast::Statement, callback::CodeGenCallback};
 
 pub struct CodeGen;
 

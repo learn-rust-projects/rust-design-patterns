@@ -1,5 +1,4 @@
-use super::hello_printer::HelloPrinter;
-use super::printer_trait::Printer;
+use super::{hello_printer::HelloPrinter, printer_trait::Printer};
 
 pub struct HelloPrinterFactory;
 

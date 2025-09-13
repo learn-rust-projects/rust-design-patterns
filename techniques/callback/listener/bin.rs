@@ -1,6 +1,7 @@
 use std::rc::Rc;
 
-/// Define a trait for click event listeners, analogous to Java's OnClickListener interface
+/// Define a trait for click event listeners, analogous to Java's
+/// OnClickListener interface
 pub trait ClickListener {
     fn on_click(&self);
 }

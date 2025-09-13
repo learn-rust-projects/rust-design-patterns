@@ -25,7 +25,8 @@ impl HandlerNode {
         }
     }
 
-    /// handle the request, if the current handler does not handle the request, pass it to the next handler
+    /// handle the request, if the current handler does not handle the request,
+    /// pass it to the next handler
     pub fn handle(&self) {
         let handled = self.handler.do_handle();
         if !handled && let Some(next) = &self.next {
@@ -33,7 +34,8 @@ impl HandlerNode {
         }
     }
 
-    /// call all handlers on the chain, regardless of whether they are successful —— all handlers will be executed
+    /// call all handlers on the chain, regardless of whether they are
+    /// successful —— all handlers will be executed
     pub fn handle_without_check(&self) {
         // ignore whether the processing is successful
         self.handler.do_handle();

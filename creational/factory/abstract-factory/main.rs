@@ -1,7 +1,5 @@
 mod foodfactory;
-pub use foodfactory::AbstractFactory;
-pub use foodfactory::ChineseFactory;
-pub use foodfactory::WesternFactory;
+pub use foodfactory::{AbstractFactory, ChineseFactory, WesternFactory};
 // ------- Client code -------
 fn main() {
     // Can be ChineseFactory or WesternFactory

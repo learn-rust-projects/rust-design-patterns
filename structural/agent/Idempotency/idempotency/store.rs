@@ -1,5 +1,4 @@
-use std::collections::HashMap;
-use std::hash::Hash;
+use std::{collections::HashMap, hash::Hash};
 
 /// Abstract storage trait for idempotency.
 /// This allows different storage backends (in-memory, database, etc.)

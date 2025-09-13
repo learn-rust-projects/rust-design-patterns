@@ -8,7 +8,8 @@ pub struct Singleton {
 }
 
 impl Singleton {
-    /// const constructor (eager singleton requires initialization at compile time)
+    /// const constructor (eager singleton requires initialization at compile
+    /// time)
     pub const fn new() -> Self {
         Self {
             data: Mutex::new(Vec::new()),

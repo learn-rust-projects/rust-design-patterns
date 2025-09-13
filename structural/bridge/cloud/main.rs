@@ -2,13 +2,12 @@ mod components;
 mod configurator;
 mod features;
 
-use components::compute_instance::ComputeInstance;
-use components::storage::Storage;
+use components::{compute_instance::ComputeInstance, storage::Storage};
 use configurator::cloud_configurator::CloudConfigurator;
-use features::capacity_control::CapacityControl;
-use features::logging_decorator::LoggingDecorator;
-use features::power_control::PowerControl;
-use features::reset_control::ResetControl;
+use features::{
+    capacity_control::CapacityControl, logging_decorator::LoggingDecorator,
+    power_control::PowerControl, reset_control::ResetControl,
+};
 
 fn main() {
     let storage = Storage {

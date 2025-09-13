@@ -1,5 +1,4 @@
-use super::printer_trait::Printer;
-use super::repeat_printer::RepeatPrinter;
+use super::{printer_trait::Printer, repeat_printer::RepeatPrinter};
 
 pub struct RepeatPrinterFactory;
 
