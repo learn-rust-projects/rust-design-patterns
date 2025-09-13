@@ -1,0 +1,4 @@
+# 对所有源代码强制使用 LF
+*.rs text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
