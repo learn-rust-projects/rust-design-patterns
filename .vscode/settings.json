@@ -22,7 +22,7 @@
     },
     "[markdown]": {
         "editor.codeActionsOnSave": {
-            "source.fixAll.markdownlint": "always", // execute markdownlint fix-all on save
+            "source.fixAll.exit": "always", // execute markdownlint fix-all on save
         },
     },
     "files.autoSave": "onFocusChange", // Auto-save files when changing focus

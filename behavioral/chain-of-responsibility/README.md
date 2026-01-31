@@ -4,12 +4,12 @@
 
 This example demonstrates two common implementations in Rust:
 
-- **Array-based (Vec)**: Best suited for static chains or when the number of handlers is fixed  
+- **Array-based (Vec)**: Best suited for static chains or when the number of handlers is fixed
 - **Linked-list-based (Box)**: Offers greater flexibility for building dynamic chains
 
 ## Pattern Structure
 
-```
+```text
 Handler (trait interface)
 ├── HandlerA (concrete handler)
 ├── HandlerB (concrete handler)

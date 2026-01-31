@@ -24,4 +24,5 @@ Traditional `if-else` logic becomes hard to maintain as payment methods grow.
     - OrderStaticService: Generic version using static dispatch
   - bin
     - main.rs: Entry point for testing both dynamic and static strategies
+
 ---

@@ -24,4 +24,5 @@
     - OrderStaticService：泛型静态分发版本
   - bin
     - main.rs：测试入口，演示动态与静态策略的使用
+
 ---
