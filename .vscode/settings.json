@@ -16,7 +16,15 @@
     // Formatting and Save Settings
     // -----------------------------
     "editor.formatOnSave": true, // Automatically format code on save
-    "editor.defaultFormatter": "rust-lang.rust-analyzer", // Use Rust Analyzer as the default formatter
+    "editor.defaultFormatter": "esbenp.prettier-vscode", // Global: Use Prettier as the default formatter for all languages
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer" // Use Rust Analyzer as the default formatter
+    },
+    "[markdown]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.markdownlint": "always", // execute markdownlint fix-all on save
+        },
+    },
     "files.autoSave": "onFocusChange", // Auto-save files when changing focus
     // -----------------------------
     // Inlay Hints (Display Type Information)
@@ -39,12 +47,15 @@
         "FIXME",
         "BUG"
     ],
+    // -----------------------------
+    // Case Converter Configuration
+    // -----------------------------
     "caseConverter.caseCycle": [
+        "pascal", // Pascal case (first letter of each word capitalized) struct or enum or Trait
+        "snake", // Snake case (all lowercase with underscores) mod or method or variable
+        "const", // Constant case (all uppercase with underscores) const or static
+        "kebab", // Kebab case (all lowercase with hyphens) package name
         "original",
-        "const",
-        "pascal",
-        "snake",
-        "kebab"
     ],
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"

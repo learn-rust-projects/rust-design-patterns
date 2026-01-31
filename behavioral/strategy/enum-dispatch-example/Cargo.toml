@@ -1,0 +1,10 @@
+[package]
+name = "enum-dispatch-example"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.100"
+enum_dispatch = "0.3.13"
+strum = { version = "0.27.2", features = ["derive"] }
+tokio = { version = "1.49.0", features = ["rt", "rt-multi-thread", "macros"] }

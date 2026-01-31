@@ -35,5 +35,6 @@ members = [
   
   "techniques/callback/codegen-template",
   "techniques/callback/listener",
-  "techniques/callback/hook",
+  "techniques/callback/hook", 
+  "behavioral/strategy/enum-dispatch-example",
 ]

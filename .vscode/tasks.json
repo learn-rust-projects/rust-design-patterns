@@ -10,7 +10,9 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": ["$rustc"],
+            "problemMatcher": [
+                "$rustc"
+            ],
             "presentation": {
                 "echo": true,
                 "reveal": "always",
